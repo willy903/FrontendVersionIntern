@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Home, Users, FolderOpen, Trello, FileText, Settings, Moon, Sun, FileCode } from 'lucide-react';
+import { X, Home, Users, FolderOpen, Trello, FileText, Settings, Moon, Sun } from 'lucide-react';
 import clsx from 'clsx';
 import { useTheme } from '../../contexts/ThemeContext';
 
@@ -16,7 +16,6 @@ const navigation = [
   { id: 'projects', name: 'Projets', icon: FolderOpen },
   { id: 'kanban', name: 'Kanban', icon: Trello },
   { id: 'reports', name: 'Rapports', icon: FileText },
-  { id: 'uml', name: 'Diagrammes UML', icon: FileCode },
   { id: 'settings', name: 'Paramètres', icon: Settings },
 ];
 
