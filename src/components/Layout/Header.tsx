@@ -2,7 +2,6 @@ import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { Bell, Search, ChevronDown, CheckCircle, AlertTriangle, Info } from 'lucide-react';
 import { mockNotifications } from '../../data/mockData';
-import NotificationModal from '../Modals/NotificationModal';
 import SearchModal from '../Modals/SearchModal';
 
 export default function Header() {
@@ -67,22 +66,30 @@ export default function Header() {
             </button>
 
             {showNotifications && (
-              <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg z-50 max-h-96 overflow-hidden">
+              <div className="fixed md:absolute inset-0 md:inset-auto md:right-0 md:mt-2 md:w-80 bg-white dark:bg-gray-800 md:border border-gray-200 dark:border-gray-700 md:rounded-xl md:shadow-lg z-50 md:max-h-96 overflow-hidden">
                 <div className="p-4 border-b border-gray-200 dark:border-gray-700">
                   <div className="flex items-center justify-between">
                     <h3 className="font-semibold text-gray-900 dark:text-white">Notifications</h3>
-                    <button
-                      onClick={() => {
-                        console.log('Mark all as read');
-                      }}
-                      className="text-xs text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300"
-                    >
-                      Tout marquer comme lu
-                    </button>
+                    <div className="flex items-center space-x-2">
+                      <button
+                        onClick={() => {
+                          console.log('Mark all as read');
+                        }}
+                        className="text-xs text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300"
+                      >
+                        Tout marquer comme lu
+                      </button>
+                      <button
+                        onClick={() => setShowNotifications(false)}
+                        className="md:hidden text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                      >
+                        ✕
+                      </button>
+                    </div>
                   </div>
                 </div>
 
-                <div className="max-h-80 overflow-y-auto">
+                <div className="h-[calc(100vh-8rem)] md:max-h-80 overflow-y-auto">
                   {mockNotifications.map((notification) => (
                     <div key={notification.id} className={`p-4 border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition-colors ${!notification.read ? 'bg-orange-50 dark:bg-orange-900/20' : ''}`}>
                       <div className="flex items-start space-x-3">
@@ -108,7 +115,7 @@ export default function Header() {
                   ))}
                 </div>
 
-                <div className="p-3 border-t border-gray-200 dark:border-gray-700">
+                <div className="p-3 border-t border-gray-200 dark:border-gray-700 hidden md:block">
                   <button
                     onClick={() => setShowNotifications(false)}
                     className="w-full text-center text-sm text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 font-medium"
@@ -160,13 +167,9 @@ export default function Header() {
     </header>
     
     {/* Modals */}
-    <NotificationModal 
-      isOpen={showNotifications} 
-      onClose={() => setShowNotifications(false)} 
-    />
-    <SearchModal 
-      isOpen={showSearch} 
-      onClose={() => setShowSearch(false)} 
+    <SearchModal
+      isOpen={showSearch}
+      onClose={() => setShowSearch(false)}
     />
     
     {/* Overlay for profile dropdown */}
