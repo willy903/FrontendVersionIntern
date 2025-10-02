@@ -10,6 +10,7 @@ import Projects from './components/Sections/Projects';
 import Kanban from './components/Sections/Kanban';
 import Reports from './components/Sections/Reports';
 import Settings from './components/Sections/Settings';
+import UMLGenerator from './components/UMLGenerator';
 
 function App() {
   const [activeSection, setActiveSection] = useState('dashboard');
@@ -37,6 +38,8 @@ function App() {
         return <Kanban />;
       case 'reports':
         return <Reports />;
+      case 'uml':
+        return <UMLGenerator />;
       case 'settings':
         return <Settings />;
       default:
